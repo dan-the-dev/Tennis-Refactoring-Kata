@@ -1,15 +1,27 @@
+import kotlin.math.abs
+
 class TennisGame1() : TennisGame {
-    private val player1Name = "player1"
-    private val player2Name = "player2"
+    private val WINNER_STRING = "Win for"
+    private val ADVANTAGE_STRING = "Advantage"
+    private val LOVE = "Love"
+    private val FIFTEEN = "Fifteen"
+    private val THIRTY = "Thirty"
+    private val FORTY = "Forty"
+    private val DEUCE = "Deuce"
+    private val ALL = "All"
+    private val PLAYER_1_NAME = "player1"
+    private val PLAYER_2_NAME = "player2"
 
     private var player1Score: Int = 0
     private var player2Score: Int = 0
 
     override fun wonPoint(playerName: String) {
-        if (playerName === player1Name)
+        if (playerName === PLAYER_1_NAME){
             player1Score += 1
-        else
-            player2Score += 1
+            return
+        }
+
+        player2Score += 1
     }
 
     override fun getScore(): String {
@@ -39,10 +51,10 @@ class TennisGame1() : TennisGame {
                 temporaryScore = player2Score
             }
             when (temporaryScore) {
-                0 -> score += "Love"
-                1 -> score += "Fifteen"
-                2 -> score += "Thirty"
-                3 -> score += "Forty"
+                0 -> score += LOVE
+                1 -> score += FIFTEEN
+                2 -> score += THIRTY
+                3 -> score += FORTY
             }
         }
         return score
@@ -50,22 +62,34 @@ class TennisGame1() : TennisGame {
 
     private fun highScores(): String {
         val scoreDifference = player1Score - player2Score
+
+        if (abs(scoreDifference) == 1) {
+            return advantagesScores(scoreDifference)
+        }
+
+        return winnerScores(scoreDifference)
+    }
+
+    private fun winnerScores(scoreDifference: Int): String {
+        if (scoreDifference >= 2)
+            return "$WINNER_STRING $PLAYER_1_NAME"
+
+        return "$WINNER_STRING $PLAYER_2_NAME"
+    }
+
+    private fun advantagesScores(scoreDifference: Int): String {
         if (scoreDifference == 1)
-            return "Advantage $player1Name"
-        else if (scoreDifference == -1)
-            return "Advantage $player2Name"
-        else if (scoreDifference >= 2)
-            return "Win for player1"
-        else
-            return "Win for $player2Name"
+            return "$ADVANTAGE_STRING $PLAYER_1_NAME"
+
+        return "$ADVANTAGE_STRING $PLAYER_2_NAME"
     }
 
     private fun equalScores(): String {
         return when (player1Score) {
-            0 -> "Love-All"
-            1 -> "Fifteen-All"
-            2 -> "Thirty-All"
-            else -> "Deuce"
+            0 -> "$LOVE-$ALL"
+            1 -> "$FIFTEEN-$ALL"
+            2 -> "$THIRTY-$ALL"
+            else -> DEUCE
         }
     }
 }
