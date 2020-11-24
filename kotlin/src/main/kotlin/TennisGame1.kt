@@ -51,7 +51,7 @@ class TennisGame1() : TennisGame {
     }
 
     private fun equalScores(): String {
-        return when (player1Score) {gi
+        return when (player1Score) {
             0 -> "Love-All"
             1 -> "Fifteen-All"
             2 -> "Thirty-All"
