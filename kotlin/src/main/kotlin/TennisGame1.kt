@@ -1,6 +1,7 @@
 class TennisGame1() : TennisGame {
     private val player1Name = "player1"
-    
+    private val player2Name = "player2"
+
     private var player1Score: Int = 0
     private var player2Score: Int = 0
 
@@ -50,13 +51,13 @@ class TennisGame1() : TennisGame {
     private fun highScores(): String {
         val scoreDifference = player1Score - player2Score
         if (scoreDifference == 1)
-            return "Advantage player1"
+            return "Advantage $player1Name"
         else if (scoreDifference == -1)
-            return "Advantage player2"
+            return "Advantage $player2Name"
         else if (scoreDifference >= 2)
             return "Win for player1"
         else
-            return "Win for player2"
+            return "Win for $player2Name"
     }
 
     private fun equalScores(): String {
