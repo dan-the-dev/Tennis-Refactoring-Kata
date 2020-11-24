@@ -14,40 +14,44 @@ class TennisGame1() : TennisGame {
         var score = ""
         var temporaryScore = 0
         if (player1Score == player2Score) {
-            return equalScores(player1Score)
+            return equalScores()
         }
 
         if (player1Score >= 4 || player2Score >= 4) {
-            val scoreDifference = player1Score - player2Score
-            if (scoreDifference == 1)
-                score = "Advantage player1"
-            else if (scoreDifference == -1)
-                score = "Advantage player2"
-            else if (scoreDifference >= 2)
-                score = "Win for player1"
-            else
-                score = "Win for player2"
-        } else {
-            for (i in 1..2) {
-                if (i == 1)
-                    temporaryScore = player1Score
-                else {
-                    score += "-"
-                    temporaryScore = player2Score
-                }
-                when (temporaryScore) {
-                    0 -> score += "Love"
-                    1 -> score += "Fifteen"
-                    2 -> score += "Thirty"
-                    3 -> score += "Forty"
-                }
+            return highScores()
+        }
+
+        for (i in 1..2) {
+            if (i == 1)
+                temporaryScore = player1Score
+            else {
+                score += "-"
+                temporaryScore = player2Score
+            }
+            when (temporaryScore) {
+                0 -> score += "Love"
+                1 -> score += "Fifteen"
+                2 -> score += "Thirty"
+                3 -> score += "Forty"
             }
         }
         return score
     }
 
-    private fun equalScores(playersScore: Int): String {
-        return when (playersScore) {
+    private fun highScores(): String {
+        val scoreDifference = player1Score - player2Score
+        if (scoreDifference == 1)
+            return "Advantage player1"
+        else if (scoreDifference == -1)
+            return "Advantage player2"
+        else if (scoreDifference >= 2)
+            return "Win for player1"
+        else
+            return "Win for player2"
+    }
+
+    private fun equalScores(): String {
+        return when (player1Score) {
             0 -> "Love-All"
             1 -> "Fifteen-All"
             2 -> "Thirty-All"
