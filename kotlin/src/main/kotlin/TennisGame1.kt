@@ -11,8 +11,6 @@ class TennisGame1() : TennisGame {
     }
 
     override fun getScore(): String {
-        var score = ""
-        var temporaryScore = 0
         if (player1Score == player2Score) {
             return equalScores()
         }
@@ -21,6 +19,12 @@ class TennisGame1() : TennisGame {
             return highScores()
         }
 
+        return lowScores()
+    }
+
+    private fun lowScores(): String {
+        var temporaryScore: Int
+        var score = ""
         for (i in 1..2) {
             if (i == 1)
                 temporaryScore = player1Score
