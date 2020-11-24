@@ -41,23 +41,18 @@ class TennisGame1() : TennisGame {
     private fun scoresAreEquals() = player1Score == player2Score
 
     private fun lowScores(): String {
-        var temporaryScore: Int
-        var score = ""
-        for (i in 1..2) {
-            if (i == 1)
-                temporaryScore = player1Score
-            else {
-                score += "-"
-                temporaryScore = player2Score
-            }
-            when (temporaryScore) {
-                0 -> score += LOVE
-                1 -> score += FIFTEEN
-                2 -> score += THIRTY
-                3 -> score += FORTY
-            }
+        val player1ScoreString = lowScoresToString(player1Score)
+        val player2scoreString = lowScoresToString(player2Score)
+        return "$player1ScoreString-$player2scoreString"
+    }
+
+    private fun lowScoresToString(score: Int): String {
+        return when (score) {
+            0 -> LOVE
+            1 -> FIFTEEN
+            2 -> THIRTY
+            else -> FORTY
         }
-        return score
     }
 
     private fun highScores(): String {
