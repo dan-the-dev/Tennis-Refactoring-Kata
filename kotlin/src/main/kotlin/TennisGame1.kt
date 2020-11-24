@@ -11,16 +11,20 @@ class TennisGame1() : TennisGame {
     }
 
     override fun getScore(): String {
-        if (player1Score == player2Score) {
+        if (scoresAreEquals()) {
             return equalScores()
         }
 
-        if (player1Score >= 4 || player2Score >= 4) {
+        if (oneOfPlayersReached4Points()) {
             return highScores()
         }
 
         return lowScores()
     }
+
+    private fun oneOfPlayersReached4Points() = player1Score >= 4 || player2Score >= 4
+
+    private fun scoresAreEquals() = player1Score == player2Score
 
     private fun lowScores(): String {
         var temporaryScore: Int
