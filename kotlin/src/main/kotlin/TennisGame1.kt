@@ -14,13 +14,10 @@ class TennisGame1() : TennisGame {
         var score = ""
         var temporaryScore = 0
         if (player1Score == player2Score) {
-            when (player1Score) {
-                0 -> score = "Love-All"
-                1 -> score = "Fifteen-All"
-                2 -> score = "Thirty-All"
-                else -> score = "Deuce"
-            }
-        } else if (player1Score >= 4 || player2Score >= 4) {
+            return equalScores(player1Score)
+        }
+
+        if (player1Score >= 4 || player2Score >= 4) {
             val scoreDifference = player1Score - player2Score
             if (scoreDifference == 1)
                 score = "Advantage player1"
@@ -47,5 +44,14 @@ class TennisGame1() : TennisGame {
             }
         }
         return score
+    }
+
+    private fun equalScores(playersScore: Int): String {
+        return when (playersScore) {
+            0 -> "Love-All"
+            1 -> "Fifteen-All"
+            2 -> "Thirty-All"
+            else -> "Deuce"
+        }
     }
 }
