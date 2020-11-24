@@ -1,5 +1,10 @@
 import kotlin.math.abs
 
+enum class Player(val playerName: String) {
+    PLAYER1("player1"),
+    PLAYER2("player1"),
+}
+
 class TennisGame1() : TennisGame {
     private val WINNER_STRING = "Win for"
     private val ADVANTAGE_STRING = "Advantage"
